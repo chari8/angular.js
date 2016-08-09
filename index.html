@@ -12,9 +12,8 @@
        
    </head>
    <body ng-controller="StoreController as store">
-      <ul class="list-group">
-       <li class="list-group-items" ng-repeat="product in store.product">
-               <div ng-hide="product.soldOut">
+      <div class="list-group">
+       <div class="list-group-items" ng-repeat="product in store.product" ng-hide="product.soldOut">
                   <h3>
                       {{product.name}} 
                       <em class="pull-right"> {{product.price | currency}} </em>
@@ -42,12 +41,37 @@
                           </div>
                           <div class="panel" ng-show="panel.isSelected(3)" >
                                   <h4>Reviews</h4>
-                                  <blockquote>None yet</blockquote>
+                                  <blockquote ng-repeat="review in product.reviews">
+                                          <b>Stars: {{review.stars}}</b>
+                                          {{review.body}}
+                                          <cite class="clearfix">-{{review.author}}</cite>
+                                  </blockquote>
+                                  <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+                                          <blockquote>
+                                                  <b>Stars: {{reviewCtrl.review.stars}}</b>
+                                                  {{reviewCtrl.review.body}}
+                                                  <cite class="clearfix">-{{reviewCtrl.review.author}}</cite>
+                                          </blockquote>
+                                          <fieldset class="form-group">
+                                            <select ng-model="reviewCtrl.review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]" title = "Stars" required>
+                                                    <option value>Rate the product</option>
+                                            </select>
+                                          </fieldset>
+                                          <fieldset class="form-group">
+                                            <textarea ng-model="reviewCtrl.review.body" class="form-contorl" placeholder="write review!" required></textarea>
+                                          </fieldset>
+                                          <fieldset>
+                                            <input ng-model="reviewCtrl.review.author" type="email" class="form-control" required/>
+                                          </fieldset>
+                                          <fieldset>
+                                            <input type="submit" value="Submit " />
+                                            <input type="hidden" reviewForm is {{reviewForm.$valid}} /> 
+                                          </fieldset>
+                                  </form>
                           </div>
                   </section>
                   <button ng-show="product.canPurchase">Add to Cart </button>
-               </div>
-       </li>
-      </ul>
+       </div>
+      </div>
    </body>
 </html>

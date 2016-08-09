@@ -16,6 +16,16 @@
           return this.tab === checkTab;
       };
   });
+
+  app.controller("ReviewController", function(){
+          this.review = {};
+
+          this.addReview = function(product){
+                  product.reviews.push(this.review);
+                  this.review = {};
+          };
+  });
+
   
   var gems = [
     {     
@@ -28,6 +38,18 @@
               thumb:'chari.ico',
               full:'chari.jpg',
           },
+          reviews: [
+            {
+                    stars: 5,
+                    body: "great",
+                    author: "M&M"
+            },
+            {
+                    stars: 1,
+                    body: "crap",
+                    author: "slim shady"
+            },
+          ],
     },
     {     
           name: 'Dodecahedron-2',
@@ -39,6 +61,18 @@
               thumb:'chari.ico',
               full:'chari.jpg',
           },
+          reviews: [
+            {
+                    stars: 1,
+                    body: "crap",
+                    author: "M&M"
+            },
+            {
+                    stars: 5,
+                    body: "great",
+                    author: "slim shady"
+            },
+          ],
     },
   ];
 
