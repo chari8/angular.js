@@ -1,6 +1,10 @@
 <!DOCTYPE>
 <html ng-app="store">
    <head>
+
+       <!--jquery-->
+       <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+
        <!--bootstrap-->
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -9,15 +13,16 @@
        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 
        <script type="text/javascript" src="app.js"></script>
-       
+       <link rel="stylesheet" href="style.css" >
+
    </head>
    <body ng-controller="StoreController as store">
       <div class="list-group">
        <div class="list-group-items" ng-repeat="product in store.product" ng-hide="product.soldOut">
                   <h3>
                       {{product.name}} 
-                      <em class="pull-right"> {{product.price | currency}} </em>
-                      <img ng-src="{{product.images.full}"/>
+                      <em class="pull-right"> {{product.price | currency}} </em><br>
+                      <img id="product_img"  ng-src="{{product.images.full}}"/>
                   </h3>
                   <section ng-controller="PanelController as panel">
                           <ul class="nav nav-pills">
@@ -58,7 +63,7 @@
                                             </select>
                                           </fieldset>
                                           <fieldset class="form-group">
-                                            <textarea ng-model="reviewCtrl.review.body" class="form-contorl" placeholder="write review!" required></textarea>
+                                            <textarea ng-model="reviewCtrl.review.body" class="form-control" placeholder="write review!" required></textarea>
                                           </fieldset>
                                           <fieldset>
                                             <input ng-model="reviewCtrl.review.author" type="email" class="form-control" required/>
